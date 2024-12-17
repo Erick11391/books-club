@@ -1,0 +1,40 @@
+{
+    "bookClubs": [
+      {
+        "id": 1,
+        "name": "Monthly Fiction Readers",
+        "description": "We read and discuss one fiction book every month.",
+        "members": 12,
+        "created_at": "2024-05-01"
+      },
+      {
+        "id": 2,
+        "name": "Classic Literature Lovers",
+        "description": "A club for those who enjoy timeless classics from around the world.",
+        "members": 8,
+        "created_at": "2024-04-15"
+      },
+      {
+        "id": 3,
+        "name": "Non-Fiction Explorers",
+        "description": "Exploring biographies, history, and thought-provoking non-fiction books.",
+        "members": 15,
+        "created_at": "2024-03-20"
+      },
+      {
+        "id": 4,
+        "name": "Science Fiction Addicts",
+        "description": "Fans of futuristic adventures, space exploration, and sci-fi classics.",
+        "members": 10,
+        "created_at": "2024-02-10"
+      },
+      {
+        "id": 5,
+        "name": "Young Adult Book Club",
+        "description": "Focused on reading popular Young Adult books and discussing themes.",
+        "members": 20,
+        "created_at": "2024-01-05"
+      }
+    ]
+  }
+  
