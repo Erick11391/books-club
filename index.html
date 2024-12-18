@@ -7,17 +7,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header Section -->
   <header>
     <h1>Welcome to Book Club App</h1>
-    <p>Your space to create, share, and comment on book clubs!</p>
+    <p>Discover and share your favorite books</p>
   </header>
   
-  <!-- Main Section -->
   <main>
-    <!-- Create Club Form -->
+    <!-- Section: Create Club -->
     <section id="create-club">
-      <h2>Create a New Club</h2>
+      <h2>Create New Club</h2>
       <form id="club-form">
         <input type="text" id="club-name" placeholder="Club Name" required>
         <textarea id="club-description" placeholder="Club Description" required></textarea>
@@ -25,36 +23,32 @@
       </form>
     </section>
 
-    <!-- Display Clubs -->
-    <section id="clubs-section">
+    <!-- Section: Club List -->
+    <section id="club-list-section">
       <h2>Your Book Clubs</h2>
       <div id="no-clubs-message">
         <p>No clubs yet. Create or join one!</p>
       </div>
       <div id="clubs-list">
-        <!-- Clubs will dynamically appear here -->
+        
       </div>
     </section>
 
-    <!-- Book Search Section -->
-    <section id="book-search-section">
+    
+    <section id="search-books">
       <h2>Search for Books</h2>
-      <div class="search-container">
-        <input type="text" id="book-search" placeholder="Search for books...">
-        <button id="search-btn">Search</button>
-      </div>
+      <input type="text" id="book-search" placeholder="Enter book title or author">
+      <button id="search-btn">Search</button>
       <div id="book-results">
-        <!-- Search results will dynamically appear here -->
+        
       </div>
     </section>
   </main>
-
-  <!-- Footer Section -->
+  
   <footer>
     <p>Book Club App © 2024</p>
   </footer>
 
-  <!-- JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>

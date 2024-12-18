@@ -1,4 +1,3 @@
-// JavaScript to manage book clubs and search functionality
 document.addEventListener('DOMContentLoaded', () => {
   const clubForm = document.getElementById('club-form');
   const clubNameInput = document.getElementById('club-name');
@@ -12,9 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Array to hold clubs
   let clubs = [];
 
-  // Function to render clubs
+  
   function renderClubs() {
-    clubsList.innerHTML = ''; // Clear previous list
+    clubsList.innerHTML = ''; 
     if (clubs.length === 0) {
       noClubsMessage.style.display = 'block';
     } else {
@@ -25,51 +24,97 @@ document.addEventListener('DOMContentLoaded', () => {
         clubDiv.innerHTML = `
           <h3>${club.name}</h3>
           <p>${club.description}</p>
+          <button class="share-btn" data-index="${index}">Share</button>
+          <button class="view-comments-btn" data-index="${index}">Comments & Reviews</button>
           <button class="delete-btn" data-index="${index}">Delete</button>
+          <div class="comments-section" id="comments-${index}" style="display: none;">
+            <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+            <button class="add-comment-btn" data-index="${index}">Add Comment</button>
+            <ul class="comments-list"></ul>
+          </div>
         `;
         clubsList.appendChild(clubDiv);
       });
     }
   }
 
-  // Event listener for creating a new club
+  
   clubForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent page refresh on form submission
+    event.preventDefault();
     const newClub = {
       name: clubNameInput.value,
       description: clubDescriptionInput.value,
+      id: Date.now(), 
+      comments: [],
     };
-    clubs.push(newClub); // Add the new club to the clubs array
-    renderClubs(); // Re-render the list of clubs
+    clubs.push(newClub);
+    renderClubs();
     clubNameInput.value = '';
     clubDescriptionInput.value = '';
   });
 
-  // Event listener for deleting a club
+  
   clubsList.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
       const index = event.target.getAttribute('data-index');
-      clubs.splice(index, 1); // Remove the club from the clubs array
-      renderClubs(); // Re-render the list of clubs after deletion
+      clubs.splice(index, 1);
+      renderClubs();
     }
   });
 
-  // Book search functionality
+  
+  clubsList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('share-btn')) {
+      const index = event.target.getAttribute('data-index');
+      const club = clubs[index];
+      const shareLink = `${window.location.href}?clubId=${club.id}`;
+      alert(`Share this link: ${shareLink}`);
+    }
+  });
+
+  
+  clubsList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('view-comments-btn')) {
+      const index = event.target.getAttribute('data-index');
+      const commentsSection = document.getElementById(`comments-${index}`);
+      commentsSection.style.display =
+        commentsSection.style.display === 'none' ? 'block' : 'none';
+    }
+  });
+
+  
+  clubsList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('add-comment-btn')) {
+      const index = event.target.getAttribute('data-index');
+      const commentInput = document.querySelector(`#comments-${index} .comment-input`);
+      const commentText = commentInput.value;
+      if (commentText) {
+        clubs[index].comments.push(commentText);
+        const commentsList = document.querySelector(`#comments-${index} .comments-list`);
+        const commentItem = document.createElement('li');
+        commentItem.textContent = commentText;
+        commentsList.appendChild(commentItem);
+        commentInput.value = ''; 
+      }
+    }
+  });
+
+  
   searchButton.addEventListener('click', async () => {
     const query = bookSearchInput.value;
-    if (query === '') return; // Don't search if the input is empty
+    if (query === '') return;
     try {
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
       const data = await response.json();
-      displayBooks(data.items); // Display search results
+      displayBooks(data.items);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
   });
 
-  // Function to display books in the search results
+  
   function displayBooks(books) {
-    bookResults.innerHTML = ''; // Clear previous search results
+    bookResults.innerHTML = '';
     books.forEach((book) => {
       const bookDiv = document.createElement('div');
       bookDiv.classList.add('book-item');
@@ -82,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial render of clubs (if any)
+  
   renderClubs();
 });
 
